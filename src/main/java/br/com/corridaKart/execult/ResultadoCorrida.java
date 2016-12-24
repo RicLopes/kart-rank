@@ -1,5 +1,7 @@
 package br.com.corridaKart.execult;
 
+import java.io.IOException;
+
 import br.com.corridaKart.model.Corrida;
 import br.com.corridaKart.negocio.CalculaResultadoCorrida;
 
@@ -8,11 +10,15 @@ public class ResultadoCorrida {
 	public static void main(String[] args) {
 	
 		CalculaResultadoCorrida calculaResultadoCorrida = new CalculaResultadoCorrida();
+		Corrida corrida = null;
+		
+		try {
+			corrida = calculaResultadoCorrida.resultadoClassificacaoCorrida();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		Corrida corrida = calculaResultadoCorrida.resultadoClassificacaoCorrida();
-
-		System.out.println("                           Podium");
-		System.out.println("#############################################################");
+		System.out.println("############################## Podium ###############################");
 		System.out.println("                          |"+corrida.getPilotos().get(0).getNome()+"|                         ");
 		System.out.println("                        _______________                           ");
 		System.out.println("                               1                                  ");
@@ -24,8 +30,7 @@ public class ResultadoCorrida {
 		System.out.println(" ");
 		
 		
-		System.out.println("                           Classificação");
-		System.out.println("####################################################################################################");
+		System.out.println("#################################################### Classificação ################################################");
 		corrida.getPilotos().forEach(piloto -> {
 			
 			StringBuilder resultado = new StringBuilder();
@@ -33,7 +38,7 @@ public class ResultadoCorrida {
 					.append(" | Código Piloto - " + piloto.getCodigoPiloto())
 					.append(" | Nome Piloto - " + piloto.getNome())
 					.append(" | Qtde Voltas Completadas - " + piloto.getVoltas().size())
-					.append(" | Melhor volta - " + piloto.getMelhorVolta() + "-" + piloto.getMelhorTempo())
+					.append(" | Melhor volta - " + piloto.getMelhorVolta() + "/" + piloto.getMelhorTempo())
 					.append(" | Velocidade média da Corrida - " + piloto.getVelocidadeMedia())
 					;
 

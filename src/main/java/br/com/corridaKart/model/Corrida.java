@@ -39,4 +39,22 @@ public class Corrida {
 		this.tempoTotal = tempoTotal;
 	}
 	
+	public Piloto adicionaPiloto(Piloto piloto) {
+		if (pilotos.isEmpty()) {
+			pilotos.add(piloto);
+		} else {
+			if (pilotos.contains(piloto)) {
+				for (Piloto pilotoInserido : pilotos) {
+					if (pilotoInserido.getCodigoPiloto().equals(piloto.getCodigoPiloto())) {
+						pilotoInserido.setHoraChegada(piloto.getHoraChegada());
+						pilotoInserido.getVoltas().add(piloto.getVoltas().get(0));
+					}
+				}
+			} else {
+				pilotos.add(piloto);
+			}
+		}
+		return piloto;
+	}
+	
 }
